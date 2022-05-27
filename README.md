@@ -245,7 +245,7 @@ Here are the lines my bitcoin script computes (except it doesn’t compute the f
 ```
 # More code for playing with in the IDE
 
-The following script computes the first 3 lines of Rule 110 when given a line of 3 <0>s and one <1> as input. It is what I ended up running directly on the blockchain in this transaction (except I had to remove the comments and change the <0> <1> syntax into things that bitcoin script actually recognizes).
+The following script computes the first 3 lines of Rule 110 when given a line of 3 <0>s and one <1> as input. It is what I ended up running directly on the blockchain in [this transaction](https://blockstream.info/testnet/tx/3dbdc2142f5e006a0bcd186abbb85a5f6612c8c25666ee039776ce3e970df1c7?expand) (except I had to remove the comments and change the <0> <1> syntax into things that bitcoin script actually recognizes).
 
 Put these first 5 lines in the "Stack Elements" pane of this IDE: https://ide.scriptwiz.app/
 

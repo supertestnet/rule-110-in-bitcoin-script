@@ -46,7 +46,7 @@ OP_ELSE
 OP_ENDIF
 ```
 
-I originally implemented a Rule 110 output function that was much larger, it had 55 operations instead of 9. It caused problems because I couldn't run the function very many times without consuming the 200 operations I am allowed to use according to bitcoin's consensus rules. But then Dusty Daemon took a look at my code and suggested using boolean logic to compress the function. I googled to see if anyone had come up with a compressed way of computing Rule 110 outputs using boolean logic and I found this research paper: https://peerj.com/preprints/2553.pdf The author proves that Rule 110's output can be computed using this pseudocode:
+I originally implemented a Rule 110 output function that was much larger, it had 55 operations instead of 9. It caused problems because I couldn't run the function very many times without consuming the 200 operations I am allowed to use according to bitcoin's consensus rules. But then Dusty Daemon took a look at my code and suggested using boolean logic to compress the function. I googled to see if anyone had a compressed way of computing Rule 110 outputs using boolean logic and I found this research paper: https://peerj.com/preprints/2553.pdf The author proves that Rule 110's output can be computed using this pseudocode:
 
 ```
 If c == true:

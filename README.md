@@ -175,9 +175,11 @@ As a reminder, here is what the first 10 lines of Rule 110 look like when 9 0s a
 
 Here are the lines my program computes (except it doesn’t compute the first one because it is given as input):
 
+```
 [row 1] 0 0 0 1
 [row 2] 0 0 1 1
 [row 3] 0 1 1 1
+```
 
 I know that the first three rows of Rule 110 aren’t very interesting, because they are just a stack of 1s that progressively takes up more and more of the row. The pattern gets more complex if you let the program continue, but even the fact that you can compute the first three lines using the logic of Rule 110 demonstrates that bitcoin can simulate a Rule 110 program. The program is not “just stacking 1s” here, it’s doing actual computation according to the logic of Rule 110, and the first three rows of that just happen to be a stack of 1s that gets bigger at first before turning into a more complex pattern. A programmer can compute any desired pattern by supplying the right inputs.
 
@@ -223,3 +225,21 @@ Row 10 of Rule 110 gets computed from row 1 on line 2457:
 
 ![](https://supertestnet.github.io/rule-110-in-bitcoin-script/rule-110-row-10-opt-3.png)
 
+As a reminder, here is what the first 10 lines of Rule 110 look like when 9 0s and a 1 are supplied as input:
+
+![](https://supertestnet.github.io/rule-110-in-bitcoin-script/image1.gif)
+
+Here are the lines my bitcoin script computes (except it doesn’t compute the first one because it is given as input):
+
+```
+[row 1] 0 0 0 0 0 0 0 0 0 1
+[row 2] 0 0 0 0 0 0 0 0 1 1
+[row 3] 0 0 0 0 0 0 0 1 1 1
+[row 4] 0 0 0 0 0 0 1 1 0 1
+[row 5] 0 0 0 0 0 1 1 1 1 1
+[row 6] 0 0 0 0 1 1 0 0 0 1
+[row 7] 0 0 0 1 1 1 0 0 1 1
+[row 8] 0 0 1 1 0 1 0 1 1 1
+[row 9] 0 1 1 1 1 1 1 1 0 1
+[row 10] 1 1 0 0 0 0 0 1 1 1
+```

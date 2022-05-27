@@ -183,13 +183,13 @@ And here are the same results with shading to clarify that the pattern matches t
 
 \[row 1\]
 
-![\#ffffff](https://via.placeholder.com/15/ffffff/000000?text=+)
+![](https://via.placeholder.com/15/ffffff/000000)
 
-![\#ffffff](https://via.placeholder.com/15/ffffff/000000?text=+)
+![](https://via.placeholder.com/15/ffffff/000000)
 
-![\#ffffff](https://via.placeholder.com/15/ffffff/000000?text=+)
+![](https://via.placeholder.com/15/ffffff/000000)
 
-![\#000000](https://via.placeholder.com/15/000000/000000?text=+)
+![](https://via.placeholder.com/15/000000/000000)
 
 \[row 2\]
 

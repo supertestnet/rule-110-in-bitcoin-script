@@ -148,3 +148,37 @@ OP_0 OP_3DUP OP_SWAP OP_IF OP_BOOLAND OP_NOT OP_TOALTSTACK OP_PUSHNUM_1 OP_ELSE 
 ```
 
 You'll notice that at the end I do op_2drop twice and I push a 1 to the stack. I drop everything because Bitcoin nodes don't like you to have anything on the stack at the end of your function except a single item that is something other than OP_FALSE or OP_0. So I drop whatever I retrieved from the altstack and push a number 1 so that the program always succeeds as long as you provide 4 binary digits of initial input. Once it succeeds you can spend any money in the address to wherever you want. But in the process you got Bitcoin nodes to execute 2 generations of a cellular automata and you simulated a universal turing machine, so I'd say that's a job well done.
+
+# Block explorers, IDEs, and Screenshots
+
+Be aware that block explorers usually choose not to display what’s on the stack after each operation of the witness script. (I’m not aware of any block explorer that DOES show play-by-play results of script operations.) The outcomes of these operations are also not stored on the blockchain. The only thing stored on the blockchain is that the program executed successfully and that money moved according to the rules of the outcome. (This particular program lets the user who supplies the inputs spend the money no matter what the results are, but you can also condition it so that a user can only withdraw the money if they supply certain inputs, or you can let one of several users withdraw depending on the results of the program and the inputs supplied by the users.)
+
+Since block explorers don’t show the results of script operations, it can be hard to see how Rule 110 got computed. I use a Bitcoin Script IDE, or integrated development environment, to see this stuff by copying in the full script and viewing the results of each operation in a side pane. The one I use is Script Wiz, which is primarily for developing Liquid blockchain apps, but also supports Bitcoin Script. Here are some screenshots of what it looks like to run my program in the Script Wiz IDE:
+
+Row 1 of Rule 110 is supplied as input to the program on line 4:
+
+![](https://supertestnet.github.io/rule-110-in-bitcoin-script/rule-110-row-1-opt-2.png)
+
+Row 2 of Rule 110 is supplied as input to the program on line 111:
+
+![](https://supertestnet.github.io/rule-110-in-bitcoin-script/rule-110-row-2-opt-2.png)
+
+Row 3 of Rule 110 is supplied as input to the program on line 222:
+
+![](https://supertestnet.github.io/rule-110-in-bitcoin-script/rule-110-row-2-opt-2.png)
+
+As a reminder, here is what the first 10 lines of Rule 110 look like when 9 0s and a 1 are supplied as input:
+
+![](https://supertestnet.github.io/rule-110-in-bitcoin-script/image1.gif)
+
+Here are the lines my program computes (except it doesn’t compute the first one because it is given as input):
+
+[row 1] 0 0 0 1
+[row 2] 0 0 1 1
+[row 3] 0 1 1 1
+
+And here are the same results with shading to clarify that the pattern matches the first three lines of Rule 110:
+
+[row 1] ![#ffffff](https://via.placeholder.com/15/ffffff/000000?text=+)  ![#ffffff](https://via.placeholder.com/15/ffffff/000000?text=+) ![#ffffff](https://via.placeholder.com/15/ffffff/000000?text=+) ![#000000](https://via.placeholder.com/15/000000/000000?text=+)
+[row 2] ![#ffffff](https://via.placeholder.com/15/ffffff/000000?text=+)  ![#ffffff](https://via.placeholder.com/15/ffffff/000000?text=+) ![#000000](https://via.placeholder.com/15/000000/000000?text=+) ![#000000](https://via.placeholder.com/15/000000/000000?text=+)
+[row 3] ![#ffffff](https://via.placeholder.com/15/ffffff/000000?text=+) ![#000000](https://via.placeholder.com/15/000000/000000?text=+) ![#000000](https://via.placeholder.com/15/000000/000000?text=+) ![#000000](https://via.placeholder.com/15/000000/000000?text=+) 

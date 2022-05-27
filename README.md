@@ -1,5 +1,11 @@
 # Rule 110 in Bitcoin Script
 
+# Video explanation
+
+[![](https://supertestnet.github.io/rule-110-in-bitcoin-script/rule-110-youtube-thumbnail.png)](https://www.youtube.com/watch?v=jZmjSZdYqpI)
+
+# On the (testnet) blockchain
+
 The following transaction spent coins from an address where the act of checking that the spend was valid required all bitcoin nodes to execute two generations of a [Rule 110 Cellular Automata](https://en.wikipedia.org/wiki/Rule_110) after being given the first generation as input: https://blockstream.info/testnet/tx/3dbdc2142f5e006a0bcd186abbb85a5f6612c8c25666ee039776ce3e970df1c7?expand
 
 Here is the raw transaction hex: `020000000001015ebd88469de17bce4e9da9d330562f4a6792a2a13caa8a5018bb3f0038cb68e40000000000feffffff01bc02000000000000160014ff9da567e62f30ea8654fa1d5fbd47bef8e3be13050000000101e1006f7c639a916b51676b686d74518763007c6874528763007b7b686f7c639a916b51676b686d74518763007c6874528763007b7b686f7c639a916b51676b686d74518763007c6874528763007b7b686f7c639a916b51676b686d74518763007c6874528763007b7b686d756c6c6c6c006f7c639a916b51676b686d74518763007c6874528763007b7b686f7c639a916b51676b686d74518763007c6874528763007b7b686f7c639a916b51676b686d74518763007c6874528763007b7b686f7c639a916b51676b686d74518763007c6874528763007b7b686d756c6c6c6c6d6d5100000000`

@@ -179,34 +179,47 @@ Here are the lines my program computes (except it doesn’t compute the first on
 [row 2] 0 0 1 1
 [row 3] 0 1 1 1
 
-And here are the same results with shading to clarify that the pattern matches the first three lines of Rule 110:
+I know that the first three rows of Rule 110 aren’t very interesting, because they are just a stack of 1s that progressively takes up more and more of the row. The pattern gets more complex if you let the program continue, but even the fact that you can compute the first three lines using the logic of Rule 110 demonstrates that bitcoin can simulate a Rule 110 program. The program is not “just stacking 1s” here, it’s doing actual computation according to the logic of Rule 110, and the first three rows of that just happen to be a stack of 1s that gets bigger at first before turning into a more complex pattern. A programmer can compute any desired pattern by supplying the right inputs.
 
-\[row 1\]
+In fact, I have a longer version of the script that computes the first 10 lines of Rule 110. This one uses more operations than bitcoin’s consensus rules allow in a transaction, so it can’t run on bitcoin unless maybe there’s a way to break it up into multiple transactions. It does run in the IDE I use and I provide it here to illustrate what happens if you can get the program to run longer on the blockchain. (Here I supply 9 0s and a 1 as input. Remember that a programmer can supply anything as input and if the programmer is clever enough they can use the predictability of Rule 110 to program a computable result. Rule 110 manipulates the information supplied to it in ways that allow a programmer to output whatever result they want on a predictable line, and by doing this they can simulate any computer program.)
 
-![](https://via.placeholder.com/15/ffffff/000000)
+Row 1 is supplied as input on line 10:
 
-![](https://via.placeholder.com/15/ffffff/000000)
+![](https://supertestnet.github.io/rule-110-in-bitcoin-script/rule-110-row-1-opt-3.png)
 
-![](https://via.placeholder.com/15/ffffff/000000)
+Row 2 of Rule 110 gets computed from row 1 on line 273:
 
-![](https://via.placeholder.com/15/000000/000000)
+![](https://supertestnet.github.io/rule-110-in-bitcoin-script/rule-110-row-2-opt-3.png)
 
-\[row 2\]
+Row 3 of Rule 110 gets computed from row 1 on line 546:
 
-![\#ffffff](https://via.placeholder.com/15/ffffff/000000?text=+)
+![](https://supertestnet.github.io/rule-110-in-bitcoin-script/rule-110-row-3-opt-3.png)
 
-![\#ffffff](https://via.placeholder.com/15/ffffff/000000?text=+)
+Row 4 of Rule 110 gets computed from row 1 on line 819:
 
-![\#000000](https://via.placeholder.com/15/000000/000000?text=+)
+![](https://supertestnet.github.io/rule-110-in-bitcoin-script/rule-110-row-4-opt-3.png)
 
-![\#000000](https://via.placeholder.com/15/000000/000000?text=+)
+Row 5 of Rule 110 gets computed from row 1 on line 1092:
 
-\[row 3\]
+![](https://supertestnet.github.io/rule-110-in-bitcoin-script/rule-110-row-5-opt-3.png)
 
-![\#ffffff](https://via.placeholder.com/15/ffffff/000000?text=+)
+Row 6 of Rule 110 gets computed from row 1 on line 1365:
 
-![\#000000](https://via.placeholder.com/15/000000/000000?text=+)
+![](https://supertestnet.github.io/rule-110-in-bitcoin-script/rule-110-row-6-opt-3.png)
 
-![\#000000](https://via.placeholder.com/15/000000/000000?text=+)
+Row 7 of Rule 110 gets computed from row 1 on line 1638:
 
-![\#000000](https://via.placeholder.com/15/000000/000000?text=+) 
+![](https://supertestnet.github.io/rule-110-in-bitcoin-script/rule-110-row-7-opt-3.png)
+
+Row 8 of Rule 110 gets computed from row 1 on line 1911:
+
+![](https://supertestnet.github.io/rule-110-in-bitcoin-script/rule-110-row-8-opt-3.png)
+
+Row 9 of Rule 110 gets computed from row 1 on line 2184:
+
+![](https://supertestnet.github.io/rule-110-in-bitcoin-script/rule-110-row-9-opt-3.png)
+
+Row 10 of Rule 110 gets computed from row 1 on line 2457:
+
+![](https://supertestnet.github.io/rule-110-in-bitcoin-script/rule-110-row-10-opt-3.png)
+

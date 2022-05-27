@@ -1,0 +1,97 @@
+<h1 id="rule-110-in-bitcoin-script">Rule 110 in Bitcoin Script</h1>
+<p>The following transaction spent coins from an address where the act of checking that the spend was valid required all bitcoin nodes to execute two generations of a <a href="https://en.wikipedia.org/wiki/Rule_110">Rule 110 Cellular Automata</a> after being given the first generation as input: <a href="https://blockstream.info/testnet/tx/3dbdc2142f5e006a0bcd186abbb85a5f6612c8c25666ee039776ce3e970df1c7?expand">https://blockstream.info/testnet/tx/3dbdc2142f5e006a0bcd186abbb85a5f6612c8c25666ee039776ce3e970df1c7?expand</a></p>
+<p>Here is the raw transaction hex: <code>020000000001015ebd88469de17bce4e9da9d330562f4a6792a2a13caa8a5018bb3f0038cb68e40000000000feffffff01bc02000000000000160014ff9da567e62f30ea8654fa1d5fbd47bef8e3be13050000000101e1006f7c639a916b51676b686d74518763007c6874528763007b7b686f7c639a916b51676b686d74518763007c6874528763007b7b686f7c639a916b51676b686d74518763007c6874528763007b7b686f7c639a916b51676b686d74518763007c6874528763007b7b686d756c6c6c6c006f7c639a916b51676b686d74518763007c6874528763007b7b686f7c639a916b51676b686d74518763007c6874528763007b7b686f7c639a916b51676b686d74518763007c6874528763007b7b686f7c639a916b51676b686d74518763007c6874528763007b7b686d756c6c6c6c6d6d5100000000</code></p>
+<h1 id="what-is-rule-110-">What is Rule 110?</h1>
+<p>Rule 110 is a name for a group of black and white patterns. A common one appears in this picture:</p>
+<p><img src="https://supertestnet.github.io/rule-110-in-bitcoin-script/image1.gif" alt=""></p>
+<p>It is an object of study by computer scientists because if you modify the top line of the image, the pattern it produces changes in predictable ways, and you can use this predictable behavior to write programs that allow people to supply any sequence of black squares and white squares as input and get an output on some lower line of the image. If users supply real information to a Rule 110 program, the Rule 110 program can manipulate that information however the programmer wants it to, and you can always tell the users that they will find the result of the computation on some pre-agreed line lower down in the image. There is more information in the wiki: <a href="https://en.wikipedia.org/wiki/Rule_110">https://en.wikipedia.org/wiki/Rule_110</a></p>
+<p>What I think is cool is that the rules for creating a Rule 110 machine can be written in Bitcoin Script and executed by bitcoin nodes.</p>
+<h1 id="does-this-mean-bitcoin-s-programming-language-bitcoin-script-is-turing-complete-">Does this mean bitcoin&#39;s programming language, Bitcoin Script, is turing complete?</h1>
+<p>I think so, but I am not an expert on these things and I am probably missing something. Last year a guy did a similar thing on the Bitcoin SV network and there was <a href="https://news.ycombinator.com/item?id=28587609">an interesting thread on Hacker News</a> about it. In that thread, someone smarter than me thinks it doesn&#39;t count as turing complete because you have to prepare these addresses with lots of parameters that are usually not known in <em>normal</em> turing machines. For example, I knew that my program would process 4 bytes of data so I manually instructed it to halt after processing those four bytes. A <em>normal</em> turing machine could process varying numbers of bytes, even billions of bytes. There would be some code inside the program that checks if there is any more input and that checker function would automatically tell the program to halt when there is none. But my implementation lacks that feature so maybe it&#39;s still not a real turing machine.</p>
+<p>On the other hand, I think I could probably implement an input length checker like that very easily, and I don&#39;t think such a checker is really necessary for a machine to count as turing complete. All real-world turing machines have limited resources, such as memory, and therefore they cannot process an unlimited number of bytes. If they try to process a program that consumes more resources than they have available, their checker will never fire and the turing machine will just break after it runs out of memory or a source of energy or after its mechanical parts wear out. Bitcoin&#39;s security measures help prevent breakage by <em>severely</em> limiting the number of operations you can do, as well as how much data you can process, but since <em>all</em> real world turing machines have limits too (just much larger ones) I think it&#39;s fair to call my Rule 110 simulator a universal turing machine, even without something that checks the length of the user&#39;s input and automatically tells it to halt when all the data is processed.</p>
+<h1 id="what-about-loops-i-thought-you-needed-loops-to-be-turing-complete-and-bitcoin-does-not-have-loops">What about loops? I thought you needed loops to be turing complete, and bitcoin does not have loops</h1>
+<p>I don&#39;t think you need them. A turing machine needs to move between different states of operation where it does different things depending on the user&#39;s input, but it&#39;s okay if those states are laid out sequentially. Then the machine just progresses from e.g. state 0 to state 1 to state 2 and those states all tell it what to do depending on what the user&#39;s input is. A machine that operates in this way never needs to &quot;loop back&quot; to a prior state. So you don&#39;t actually need loops to simulate a turing machine -- or at least I don&#39;t think you do, but maybe I&#39;m missing something.</p>
+<h1 id="if-rule-110-is-turing-complete-is-it-useful-to-simulate-it-in-bitcoin-script-">If Rule 110 is turing complete, is it useful to simulate it in Bitcoin Script?</h1>
+<p>I&#39;m really not sure but quite possibly not. Bitcoin&#39;s limitations on script length include a rule that no more than 200 operations can be performed in a given script (with an exception for operations that only deposit a number onto the stack). A Rule 110 program that actually did anything signficant would probably need to perform hundreds of thousands of operations on the user&#39;s input, and the user&#39;s input would also need to be absolutely massive. So this is really just a toy simulator, not something you can realistically do meaningful processing with. But I don&#39;t need it to be useful. I had a lot of fun making it and to me the fun is worth the effort.</p>
+<p>On the other hand, if I&#39;m right that Bitcoin Script is turing complete, there are some very useful things you can do without simulating Rule 110, which is incredibly inefficient as a computing device anyway. The very existence of my &quot;Proof of Turing Completeness&quot; (if my proof is valid, which it might not be) may prompt some people to seek out some of the other unexpected things Bitcoin Script can do. It&#39;s certainly got me on the watch for fantastic discoveries. The cellular automata I simulated creates an environment on the boundary between chaos and stability. To me that sounds like a pretty neat place to explore.</p>
+<h1 id="how-does-it-work-">How does it work?</h1>
+<p>The heart of the program is this function, which takes any sequence of 3 binary digits as input and computes an output that corresponds to what it should be on a Rule 110 table, which it then outputs to the altstack:</p>
+<pre><code><span class="hljs-attribute">OP_SWAP</span>
+OP_IF
+    OP_BOOLAND
+    OP_NOT
+    OP_TOALTSTACK
+    OP_1
+OP_ELSE
+    OP_TOALTSTACK
+OP_ENDIF
+</code></pre><p>I originally implemented a Rule 110 output function that was much larger, it had 55 operations instead of 9. It caused problems because I couldn&#39;t run the function very many times without consuming the 200 operations I am allowed to use according to bitcoin&#39;s consensus rules. But then Dusty Daemon took a look at my code and suggested using boolean logic to compress the function. I googled to see if anyone had come up with a compressed way of computing Rule 110 outputs using boolean logic and I found this research paper: <a href="https://peerj.com/preprints/2553.pdf">https://peerj.com/preprints/2553.pdf</a> The author proves that Rule 110&#39;s output can be computed using this pseudocode:</p>
+<pre><code><span class="hljs-keyword">If</span> c == <span class="hljs-literal">true</span>:
+    <span class="hljs-built_in">print</span>(p NAND q)
+<span class="hljs-keyword">Else</span>:
+    <span class="hljs-built_in">print</span>(q)
+<span class="hljs-keyword">End</span> <span class="hljs-keyword">if</span>
+</code></pre><p>Which is what I implemented in Bitcoin Script above. (The extra <1> I outputed in my version is necessary so that the program always leaves 1 element on the stack, which is required by other parts of my overall program.) I am really glad that someone figured out what is probably the most efficient possible way to compute Rule 110 outputs -- standing on the shoulders of giants is the only way my program works at all.</p>
+<h1 id="a-few-prefixes-and-suffixes">A few prefixes and suffixes</h1>
+<p>To compute a full line of Rule 110 the program can&#39;t just run the Rule 110 output function on 3 digits. It needs to take a string of varying length as input and run many times to compute a full line. To do this my program adds to the main function a few prefixes and suffixes. It also needs room to run a bunch of times – as many times as the inputs you provide. E.g. if the programmer wants users to provide a sequence of 10 0s and 1s as input, he or she will need to copy/paste the Rule 110 output function 10 times. He or she will also need to apply the following prefix before each run of the function: <code>OP_3DUP</code> (My rule 110 function consumes the top 2 digits of input but the bottom 2 need to be used again the next time it runs, so I duplicate all 3 and then drop 2 inputs later after the program runs.)</p>
+<p>The program also needs the programmer to apply the following suffix after each run of the function:</p>
+<pre><code><span class="hljs-attribute">OP_2DROP</span>
+OP_DEPTH
+OP_1
+OP_EQUAL
+OP_IF
+    OP_0
+    OP_SWAP
+OP_ENDIF
+OP_DEPTH
+OP_2
+OP_EQUAL
+OP_IF
+    OP_0
+    OP_ROT
+    OP_ROT
+OP_ENDIF
+</code></pre><p>This sequence of commands cleans up the stack and loads the next set of 3 inputs so that they can be processed by the Rule 110 output function. If we are nearing the end of the stack it also adds up to two 0s to the bottom of the stack so that the OP_3DUP function won&#39;t fail when the stack runs out of elements. This is fine because Rule 110 assumes that if you are computing the output of only 2 digits, there is an imagined third one that is always a 0.</p>
+<p>When all of these prefixes and suffixes are applied I get this result which I repeat for however many inputs there are to the program:</p>
+<pre><code><span class="hljs-attribute">OP_3DUP</span>
+OP_SWAP
+OP_IF
+    OP_BOOLAND
+    OP_NOT
+    OP_TOALTSTACK
+    OP_1
+OP_ELSE
+    OP_TOALTSTACK
+OP_ENDIF
+OP_2DROP
+OP_DEPTH
+OP_1
+OP_EQUAL
+OP_IF
+    OP_0
+    OP_SWAP
+OP_ENDIF
+OP_DEPTH
+OP_2
+OP_EQUAL
+OP_IF
+    OP_0
+    OP_ROT
+    OP_ROT
+OP_ENDIF
+</code></pre><p>You can see that this sequence of opcodes and numbers repeats 4 times in the top half of the witness script that I actually ran on the blockchain:</p>
+<pre><code><span class="hljs-attribute">OP_3DUP</span> OP_SWAP OP_IF OP_BOOLAND OP_NOT OP_TOALTSTACK OP_PUSHNUM_1 OP_ELSE OP_TOALTSTACK OP_ENDIF OP_2DROP OP_DEPTH OP_PUSHNUM_1 OP_EQUAL OP_IF OP_0 OP_SWAP OP_ENDIF OP_DEPTH OP_PUSHNUM_2 OP_EQUAL OP_IF OP_0 OP_ROT OP_ROT OP_ENDIF OP_3DUP OP_SWAP OP_IF OP_BOOLAND OP_NOT OP_TOALTSTACK OP_PUSHNUM_1 OP_ELSE OP_TOALTSTACK OP_ENDIF OP_2DROP OP_DEPTH OP_PUSHNUM_1 OP_EQUAL OP_IF OP_0 OP_SWAP OP_ENDIF OP_DEPTH OP_PUSHNUM_2 OP_EQUAL OP_IF OP_0 OP_ROT OP_ROT OP_ENDIF OP_3DUP OP_SWAP OP_IF OP_BOOLAND OP_NOT OP_TOALTSTACK OP_PUSHNUM_1 OP_ELSE OP_TOALTSTACK OP_ENDIF OP_2DROP OP_DEPTH OP_PUSHNUM_1 OP_EQUAL OP_IF OP_0 OP_SWAP OP_ENDIF OP_DEPTH OP_PUSHNUM_2 OP_EQUAL OP_IF OP_0 OP_ROT OP_ROT OP_ENDIF OP_3DUP OP_SWAP OP_IF OP_BOOLAND OP_NOT OP_TOALTSTACK OP_PUSHNUM_1 OP_ELSE OP_TOALTSTACK OP_ENDIF OP_2DROP OP_DEPTH OP_PUSHNUM_1 OP_EQUAL OP_IF OP_0 OP_SWAP OP_ENDIF OP_DEPTH OP_PUSHNUM_2 OP_EQUAL OP_IF OP_0 OP_ROT OP_ROT OP_ENDIF
+</code></pre><h1 id="a-few-more-prefixes-and-suffixes">A few more prefixes and suffixes</h1>
+<p>By repeating the Rule 110 output function 4 times, Bitcoin Script can take any line of any 4 digit Rule 110 pattern as input and compute the next line as output. But it&#39;s not ready yet, it needs a few more prefixes and suffixes and there is space to compute 2 lines so let&#39;s do that.</p>
+<p>Earlier I said that if you are computing the output of only 2 digits using Rule 110, there is an imagined third digit that is always a 0. That&#39;s not only true when you are nearing the end of the input elements, it&#39;s also true at the beginning. Another way of saying that is this: to compute the &quot;rightmost&quot; digit of each line of the Rule 110 pattern, assume there is a 0 after whatever digits you supplied as input. So my function needs to deposit a zero onto the top of the stack right off the bat, which is why the first instruction in my witness script is <code>OP_0</code>. That prefix needs to be applied before you compute any line of Rule 110 so we will end up putting it on the stack twice, once at the beginning of the witness script and once in the middle.</p>
+<p>Also, when you compute the second line of Rule 110 from the first (remember, the first line is supplied as input), the outputs are all deposited to the altstack. To use them as input for the third line of Rule 110, we need to retrieve them from the altstack. But before doing that, we need to &quot;tidy up&quot; the stack, because the suffix to the Rule 110 output function always adds up to two 0s to the stack when we are nearing the end of the stack, and once the line is complete we don&#39;t need those 0s anymore. So let&#39;s tidy up the stack by dropping the last two 0s and then retrieve Line 2 (which is currently on the altstack) as input for Line 3.</p>
+<pre><code><span class="hljs-attribute">OP_2DROP</span>
+OP_DROP
+OP_FROMALTSTACK
+OP_FROMALTSTACK
+OP_FROMALTSTACK
+OP_FROMALTSTACK
+</code></pre><h1 id="the-whole-program">The whole program</h1>
+<p>If you had 10 bytes of input and if you consequently ran the Rule 110 output function 10 times, you&#39;d need to retrieve 10 items from the altstack, but here I am only retrieving 4 items because I assume there are only 4 bytes of input. But we&#39;re almost done! By retrieving the bytes from the altstack we are back in our starting position except with a new input line, so we can duplicate what we did before to get the third line of Rule 110. The whole program looks like this:</p>
+<pre><code><span class="hljs-attribute">OP_0</span> OP_3DUP OP_SWAP OP_IF OP_BOOLAND OP_NOT OP_TOALTSTACK OP_PUSHNUM_1 OP_ELSE OP_TOALTSTACK OP_ENDIF OP_2DROP OP_DEPTH OP_PUSHNUM_1 OP_EQUAL OP_IF OP_0 OP_SWAP OP_ENDIF OP_DEPTH OP_PUSHNUM_2 OP_EQUAL OP_IF OP_0 OP_ROT OP_ROT OP_ENDIF OP_3DUP OP_SWAP OP_IF OP_BOOLAND OP_NOT OP_TOALTSTACK OP_PUSHNUM_1 OP_ELSE OP_TOALTSTACK OP_ENDIF OP_2DROP OP_DEPTH OP_PUSHNUM_1 OP_EQUAL OP_IF OP_0 OP_SWAP OP_ENDIF OP_DEPTH OP_PUSHNUM_2 OP_EQUAL OP_IF OP_0 OP_ROT OP_ROT OP_ENDIF OP_3DUP OP_SWAP OP_IF OP_BOOLAND OP_NOT OP_TOALTSTACK OP_PUSHNUM_1 OP_ELSE OP_TOALTSTACK OP_ENDIF OP_2DROP OP_DEPTH OP_PUSHNUM_1 OP_EQUAL OP_IF OP_0 OP_SWAP OP_ENDIF OP_DEPTH OP_PUSHNUM_2 OP_EQUAL OP_IF OP_0 OP_ROT OP_ROT OP_ENDIF OP_3DUP OP_SWAP OP_IF OP_BOOLAND OP_NOT OP_TOALTSTACK OP_PUSHNUM_1 OP_ELSE OP_TOALTSTACK OP_ENDIF OP_2DROP OP_DEPTH OP_PUSHNUM_1 OP_EQUAL OP_IF OP_0 OP_SWAP OP_ENDIF OP_DEPTH OP_PUSHNUM_2 OP_EQUAL OP_IF OP_0 OP_ROT OP_ROT OP_ENDIF OP_2DROP OP_DROP OP_FROMALTSTACK OP_FROMALTSTACK OP_FROMALTSTACK OP_FROMALTSTACK OP_0 OP_3DUP OP_SWAP OP_IF OP_BOOLAND OP_NOT OP_TOALTSTACK OP_PUSHNUM_1 OP_ELSE OP_TOALTSTACK OP_ENDIF OP_2DROP OP_DEPTH OP_PUSHNUM_1 OP_EQUAL OP_IF OP_0 OP_SWAP OP_ENDIF OP_DEPTH OP_PUSHNUM_2 OP_EQUAL OP_IF OP_0 OP_ROT OP_ROT OP_ENDIF OP_3DUP OP_SWAP OP_IF OP_BOOLAND OP_NOT OP_TOALTSTACK OP_PUSHNUM_1 OP_ELSE OP_TOALTSTACK OP_ENDIF OP_2DROP OP_DEPTH OP_PUSHNUM_1 OP_EQUAL OP_IF OP_0 OP_SWAP OP_ENDIF OP_DEPTH OP_PUSHNUM_2 OP_EQUAL OP_IF OP_0 OP_ROT OP_ROT OP_ENDIF OP_3DUP OP_SWAP OP_IF OP_BOOLAND OP_NOT OP_TOALTSTACK OP_PUSHNUM_1 OP_ELSE OP_TOALTSTACK OP_ENDIF OP_2DROP OP_DEPTH OP_PUSHNUM_1 OP_EQUAL OP_IF OP_0 OP_SWAP OP_ENDIF OP_DEPTH OP_PUSHNUM_2 OP_EQUAL OP_IF OP_0 OP_ROT OP_ROT OP_ENDIF OP_3DUP OP_SWAP OP_IF OP_BOOLAND OP_NOT OP_TOALTSTACK OP_PUSHNUM_1 OP_ELSE OP_TOALTSTACK OP_ENDIF OP_2DROP OP_DEPTH OP_PUSHNUM_1 OP_EQUAL OP_IF OP_0 OP_SWAP OP_ENDIF OP_DEPTH OP_PUSHNUM_2 OP_EQUAL OP_IF OP_0 OP_ROT OP_ROT OP_ENDIF OP_2DROP OP_DROP OP_FROMALTSTACK OP_FROMALTSTACK OP_FROMALTSTACK OP_FROMALTSTACK OP_2DROP OP_2DROP OP_PUSHNUM_1
+</code></pre><p>You&#39;ll notice that at the end I do op_2drop twice and I push a 1 to the stack. I drop everything because Bitcoin nodes don&#39;t like you to have anything on the stack at the end of your function except a single item that is something other than OP_FALSE or OP_0. So I drop whatever I retrieved from the altstack and push a number 1 so that the program always succeeds as long as you provide 4 binary digits of initial input. Once it succeeds you can spend any money in the address to wherever you want. But in the process you got Bitcoin nodes to execute 2 generations of a cellular automata and you simulated a universal turing machine, so I&#39;d say that&#39;s a job well done.</p>

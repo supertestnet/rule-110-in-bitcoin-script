@@ -161,11 +161,11 @@ Row 1 of Rule 110 is supplied as input to the program on line 4:
 
 ![](https://supertestnet.github.io/rule-110-in-bitcoin-script/rule-110-row-1-opt-2.png)
 
-Row 2 of Rule 110 is supplied as input to the program on line 111:
+Row 2 of Rule 110 gets computed from row 1 on line 111:
 
 ![](https://supertestnet.github.io/rule-110-in-bitcoin-script/rule-110-row-2-opt-2.png)
 
-Row 3 of Rule 110 is supplied as input to the program on line 222:
+Row 3 of Rule 110 gets computed from row 2 on line 222:
 
 ![](https://supertestnet.github.io/rule-110-in-bitcoin-script/rule-110-row-2-opt-2.png)
 

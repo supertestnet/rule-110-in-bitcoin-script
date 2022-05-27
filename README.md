@@ -243,3 +243,271 @@ Here are the lines my bitcoin script computes (except it doesn’t compute the f
 [row 9] 0 1 1 1 1 1 1 1 0 1
 [row 10] 1 1 0 0 0 0 0 1 1 1
 ```
+# More code for playing with in the IDE
+
+The following script computes the first 3 lines of Rule 110 when given a line of 3 <0>s and one <1> as input. It is what I ended up running directly on the blockchain in this transaction (except I had to remove the comments and change the <0> <1> syntax into things that bitcoin script actually recognizes).
+
+Put these first 5 lines in the "Stack Elements" pane of this IDE: https://ide.scriptwiz.app/
+
+```
+//The following items are inputs. The output of my program should be various lines of rule 110.
+<0>
+<0>
+<0>
+<1>
+```
+
+Put all of these lines in the “Witness Script” pane. The results should show up on the righthand side of the screen.
+
+```
+//Start generation 2
+<0>
+//Duplicate the top three stack elements so that they become inputs to the rule 110 function
+OP_3DUP
+OP_SWAP
+OP_IF
+   OP_BOOLAND
+   OP_NOT
+   OP_TOALTSTACK
+   <1>
+OP_ELSE
+   OP_TOALTSTACK
+OP_ENDIF
+//shift the tape to the right
+OP_2DROP
+//if we are nearing the end of the tape, add imaginary 0s to it
+OP_DEPTH
+<1>
+OP_EQUAL
+OP_IF
+   <0>
+   OP_SWAP
+OP_ENDIF
+OP_DEPTH
+<2>
+OP_EQUAL
+OP_IF
+   <0>
+   OP_ROT
+   OP_ROT
+OP_ENDIF
+//Duplicate the top three stack elements so that they become inputs to the rule 110 function
+OP_3DUP
+OP_SWAP
+OP_IF
+   OP_BOOLAND
+   OP_NOT
+   OP_TOALTSTACK
+   <1>
+OP_ELSE
+   OP_TOALTSTACK
+OP_ENDIF
+//shift the tape to the right
+OP_2DROP
+//if we are nearing the end of the tape, add imaginary 0s to it
+OP_DEPTH
+<1>
+OP_EQUAL
+OP_IF
+   <0>
+   OP_SWAP
+OP_ENDIF
+OP_DEPTH
+<2>
+OP_EQUAL
+OP_IF
+   <0>
+   OP_ROT
+   OP_ROT
+OP_ENDIF
+//Duplicate the top three stack elements so that they become inputs to the rule 110 function
+OP_3DUP
+OP_SWAP
+OP_IF
+   OP_BOOLAND
+   OP_NOT
+   OP_TOALTSTACK
+   <1>
+OP_ELSE
+   OP_TOALTSTACK
+OP_ENDIF
+//shift the tape to the right
+OP_2DROP
+//if we are nearing the end of the tape, add imaginary 0s to it
+OP_DEPTH
+<1>
+OP_EQUAL
+OP_IF
+   <0>
+   OP_SWAP
+OP_ENDIF
+OP_DEPTH
+<2>
+OP_EQUAL
+OP_IF
+   <0>
+   OP_ROT
+   OP_ROT
+OP_ENDIF
+//Duplicate the top three stack elements so that they become inputs to the rule 110 function
+OP_3DUP
+OP_SWAP
+OP_IF
+   OP_BOOLAND
+   OP_NOT
+   OP_TOALTSTACK
+   <1>
+OP_ELSE
+   OP_TOALTSTACK
+OP_ENDIF
+//shift the tape to the right
+OP_2DROP
+//if we are nearing the end of the tape, add imaginary 0s to it
+OP_DEPTH
+<1>
+OP_EQUAL
+OP_IF
+   <0>
+   OP_SWAP
+OP_ENDIF
+OP_DEPTH
+<2>
+OP_EQUAL
+OP_IF
+   <0>
+   OP_ROT
+   OP_ROT
+OP_ENDIF
+OP_2DROP
+OP_DROP
+OP_FROMALTSTACK
+OP_FROMALTSTACK
+OP_FROMALTSTACK
+OP_FROMALTSTACK
+//Start generation 3
+<0>
+//Duplicate the top three stack elements so that they become inputs to the rule 110 function
+OP_3DUP
+OP_SWAP
+OP_IF
+   OP_BOOLAND
+   OP_NOT
+   OP_TOALTSTACK
+   <1>
+OP_ELSE
+   OP_TOALTSTACK
+OP_ENDIF
+//shift the tape to the right
+OP_2DROP
+//if we are nearing the end of the tape, add imaginary 0s to it
+OP_DEPTH
+<1>
+OP_EQUAL
+OP_IF
+   <0>
+   OP_SWAP
+OP_ENDIF
+OP_DEPTH
+<2>
+OP_EQUAL
+OP_IF
+   <0>
+   OP_ROT
+   OP_ROT
+OP_ENDIF
+//Duplicate the top three stack elements so that they become inputs to the rule 110 function
+OP_3DUP
+OP_SWAP
+OP_IF
+   OP_BOOLAND
+   OP_NOT
+   OP_TOALTSTACK
+   <1>
+OP_ELSE
+   OP_TOALTSTACK
+OP_ENDIF
+//shift the tape to the right
+OP_2DROP
+//if we are nearing the end of the tape, add imaginary 0s to it
+OP_DEPTH
+<1>
+OP_EQUAL
+OP_IF
+   <0>
+   OP_SWAP
+OP_ENDIF
+OP_DEPTH
+<2>
+OP_EQUAL
+OP_IF
+   <0>
+   OP_ROT
+   OP_ROT
+OP_ENDIF
+//Duplicate the top three stack elements so that they become inputs to the rule 110 function
+OP_3DUP
+OP_SWAP
+OP_IF
+   OP_BOOLAND
+   OP_NOT
+   OP_TOALTSTACK
+   <1>
+OP_ELSE
+   OP_TOALTSTACK
+OP_ENDIF
+//shift the tape to the right
+OP_2DROP
+//if we are nearing the end of the tape, add imaginary 0s to it
+OP_DEPTH
+<1>
+OP_EQUAL
+OP_IF
+   <0>
+   OP_SWAP
+OP_ENDIF
+OP_DEPTH
+<2>
+OP_EQUAL
+OP_IF
+   <0>
+   OP_ROT
+   OP_ROT
+OP_ENDIF
+//Duplicate the top three stack elements so that they become inputs to the rule 110 function
+OP_3DUP
+OP_SWAP
+OP_IF
+   OP_BOOLAND
+   OP_NOT
+   OP_TOALTSTACK
+   <1>
+OP_ELSE
+   OP_TOALTSTACK
+OP_ENDIF
+//shift the tape to the right
+OP_2DROP
+//if we are nearing the end of the tape, add imaginary 0s to it
+OP_DEPTH
+<1>
+OP_EQUAL
+OP_IF
+   <0>
+   OP_SWAP
+OP_ENDIF
+OP_DEPTH
+<2>
+OP_EQUAL
+OP_IF
+   <0>
+   OP_ROT
+   OP_ROT
+OP_ENDIF
+OP_2DROP
+OP_DROP
+OP_FROMALTSTACK
+OP_FROMALTSTACK
+OP_FROMALTSTACK
+OP_FROMALTSTACK
+```
+
+The 
